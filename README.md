@@ -22,7 +22,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Take a look](https://your-solution-url.com)
+- Solution URL: [Take a look](https://www.frontendmentor.io/solutions/interactive-comments-section-sZCUQCfQMn)
 - Live Site URL: [Take a look](https://abdulaziz-m895.github.io/Interactive-comments-section/)
 
 ## My process
