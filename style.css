@@ -1,0 +1,397 @@
+:root {
+  --Moderate-blue: hsl(238, 40%, 52%);
+  --Soft-Red: hsl(358, 79%, 66%);
+  --Light-grayish-blue: hsla(239, 58%, 85%, 0.18);
+  --Pale-red: hsl(357, 100%, 86%);
+  --Darkblue: hsl(212, 24%, 26%);
+  --Grayish-Blue: hsl(211, 10%, 45%);
+  --Light-gray: hsl(223, 19%, 93%);
+  --Very-light-gray: hsl(228, 33%, 97%);
+  --White: hsl(0, 0%, 100%);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding: 20px;
+}
+body {
+  font-family: "Rubik", sans-serif;
+  background-color: var(--Very-light-gray);
+  position: relative;
+}
+a,
+span,
+img {
+  display: inline-block;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.delete-animation {
+  opacity: 0;
+  overflow: hidden;
+  padding-block: 0 !important;
+}
+.container {
+  padding: 30px 15px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+/* Desktop */
+@media (min-width: 1440px) {
+  .container {
+    width: 1400px;
+  }
+}
+
+.comment,
+.replies {
+  width: 70%;
+  background-color: var(--White);
+  border-radius: 15px;
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  transition: 0.7s;
+}
+.vote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15%;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: var(--Light-grayish-blue);
+  height: 100px;
+  width: 45px;
+}
+.vote .image {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+.vote .image:first-of-type:after {
+  content: "+";
+  position: absolute;
+  left: 50%;
+  transform: translate(-54%, -29%);
+  width: 100%;
+  height: 100%;
+  color: var(--Moderate-blue);
+  font-size: 25px;
+  font-weight: 700;
+  opacity: 0;
+  transition: 0.3s;
+}
+.first .vote .image:first-of-type:after {
+  transform: translate(-50%, -37%);
+  font-size: 27.5px;
+}
+.vote .image:last-of-type:after {
+  content: "";
+  position: absolute;
+  top: 65%;
+  left: 48%;
+  transform: translate(-50%, -19%);
+  width: 100%;
+  border-radius: 1px;
+  height: 20%;
+  background-color: var(--Moderate-blue);
+  opacity: 0;
+  transition: 0.3s;
+}
+.first .vote .image:last-of-type:after {
+  transform: translate(-50%, -50%);
+}
+.vote .image:first-of-type:hover::after,
+.vote .image:last-of-type:hover::after {
+  opacity: 1;
+}
+.vote img {
+  width: 100%;
+  cursor: pointer;
+}
+.vote .score {
+  color: var(--Moderate-blue);
+  font-size: 18px;
+  font-weight: 600;
+}
+.text {
+  width: 100%;
+}
+.text__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.text__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.text__user img {
+  width: 33px;
+}
+.text__name {
+  font-size: 1rem;
+  color: var(--Darkblue);
+}
+.date {
+  color: var(--Grayish-Blue);
+}
+:is(.text__reply, .text__delete) {
+  color: var(--Moderate-blue);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.text__reply:hover {
+  opacity: 0.5;
+}
+.text__paragraph {
+  line-height: 1.3;
+  color: var(--Grayish-Blue);
+}
+
+.replies {
+  background-color: transparent;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px 0;
+  position: relative;
+}
+.replies::after {
+  content: "";
+  height: 97%;
+  width: 2px;
+  background-color: var(--Light-gray);
+  position: absolute;
+  left: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.replies .comment {
+  width: 90%;
+}
+.juliusomo .you {
+  background-color: var(--Moderate-blue);
+  padding: 4px 6px;
+  font-size: 15px;
+  color: var(--White);
+}
+.juliusomo .text__delete {
+  cursor: auto;
+  display: flex;
+  gap: 10px;
+}
+.juliusomo .text__delete .delete {
+  color: var(--Soft-Red);
+  cursor: pointer;
+  transition: inherit;
+}
+.juliusomo .text__delete .edit {
+  cursor: pointer;
+  transition: inherit;
+}
+.juliusomo .text__delete .delete:hover,
+.juliusomo .text__delete .edit:hover {
+  opacity: 0.5;
+}
+.mention {
+  color: var(--Moderate-blue);
+  font-weight: 500;
+}
+
+.add-comment {
+  align-items: flex-start;
+  position: relative;
+}
+
+.add-comment textarea {
+  border: 1.5px solid var(--Light-gray);
+  outline: none;
+  padding: 10px;
+  resize: none;
+  flex: 1;
+  border-radius: 10px;
+  height: 80px;
+  caret-color: var(--Moderate-blue);
+  color: var(--Grayish-Blue);
+  transition: 0.3s;
+}
+.add-comment textarea:focus {
+  border-color: var(--Moderate-blue);
+}
+::placeholder {
+  color: var(--Grayish-Blue);
+}
+.add-comment img {
+  width: 40px;
+}
+button {
+  background-color: var(--Moderate-blue);
+  padding: 17px 30px;
+  color: var(--White);
+  border: none;
+  font-size: 17px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:active {
+  opacity: 0.5;
+  scale: 0.95;
+}
+button:hover {
+  opacity: 0.7;
+}
+.delete-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--White);
+  padding: 20px;
+  z-index: 1;
+  width: 350px;
+  border-radius: 10px;
+}
+.delete__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.delete__heading {
+  color: var(--Darkblue);
+}
+.delete__paragraph {
+  color: var(--Grayish-Blue);
+  margin-block: 10px 20px;
+  line-height: 1.3;
+}
+.delete__btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+.delete__btns button {
+  padding: 12px 20px;
+  font-size: 16px;
+}
+.delete__cancel {
+  background-color: var(--Grayish-Blue);
+}
+.delete__delete {
+  background-color: var(--Soft-Red);
+}
+@media (max-width: 991px) {
+  .comment,
+  .replies {
+    width: 100%;
+  }
+  .replies::after {
+    left: 5%;
+  }
+}
+@media (max-width: 767px) {
+  .comment:not(.add-comment) {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .vote {
+    flex-direction: row;
+    height: 45px;
+    width: 100px;
+  }
+  .vote .image {
+    display: flex;
+    align-items: center;
+  }
+  .vote .image:first-of-type:after {
+    transform: translate(-52%, -51%);
+    font-size: 35.5px;
+  }
+  .vote .image:last-of-type:after {
+    transform: translate(-52%, -67%);
+    width: 90%;
+    height: 90%;
+  }
+  .first .vote .image:first-of-type:after {
+    transform: translate(-52%, -50%);
+  }
+  .first .vote .image:last-of-type:after {
+    transform: translate(-55%, -73%);
+    width: 94%;
+  }
+  :is(.text__reply, .text__delete) {
+    position: absolute;
+    bottom: 41px;
+    right: 20px;
+  }
+  .add-comment {
+    flex-direction: column-reverse;
+  }
+  .add-comment img {
+    width: 45px;
+  }
+  .add-comment textarea {
+    width: 100%;
+  }
+  .add-comment button {
+    position: absolute;
+    right: 20px;
+    bottom: 21px;
+  }
+}
+@media (max-width: 360px) {
+  .juliusomo .text__delete {
+    flex-direction: column;
+    bottom: 25px;
+  }
+  .date {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .delete-popup {
+    width: 300px;
+  }
+  .delete__btns button {
+    font-size: 13px;
+  }
+}

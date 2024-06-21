@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Frontend Mentor | Interactive comments section</title>
+
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+        width: 100%;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Pull dynamic content from the data.json file -->
+
+    <main class="container">
+      <div class="comment first">
+        <div class="vote">
+          <div class="image plus">
+            <img src="images/icon-plus.svg" alt="plus" />
+          </div>
+          <span class="score"></span>
+          <div class="image minus">
+            <img src="images/icon-minus.svg" alt="plus" />
+          </div>
+        </div>
+        <div class="text">
+          <div class="text__header">
+            <div class="text__user">
+              <img src="" alt="user" />
+              <h2 class="text__name"></h2>
+              <span class="date"></span>
+            </div>
+            <div class="text__reply btn">
+              <img src="images/icon-reply.svg" alt="reply icon" />
+              <span class="reply">Reply</span>
+            </div>
+          </div>
+          <p class="text__paragraph"></p>
+        </div>
+      </div>
+      <div class="comment">
+        <div class="vote">
+          <div class="image plus">
+            <img src="images/icon-plus.svg" alt="plus" />
+          </div>
+          <span class="score"></span>
+          <div class="image minus">
+            <img src="images/icon-minus.svg" alt="plus" />
+          </div>
+        </div>
+        <div class="text">
+          <div class="text__header">
+            <div class="text__user">
+              <img src="" alt="user" />
+              <h2 class="text__name"></h2>
+              <span class="date"></span>
+            </div>
+            <div class="text__reply btn">
+              <img src="images/icon-reply.svg" alt="reply icon" />
+              <span class="reply btn">Reply</span>
+            </div>
+          </div>
+          <p class="text__paragraph"></p>
+        </div>
+      </div>
+      <div class="replies">
+        <div class="comment">
+          <div class="vote">
+            <div class="image plus">
+              <img src="images/icon-plus.svg" alt="plus" />
+            </div>
+            <span class="score"></span>
+            <div class="image minus">
+              <img src="images/icon-minus.svg" alt="plus" />
+            </div>
+          </div>
+          <div class="text">
+            <div class="text__header">
+              <div class="text__user">
+                <img src="" alt="user" />
+                <h2 class="text__name"></h2>
+                <span class="date"></span>
+              </div>
+              <div class="text__reply btn">
+                <img src="images/icon-reply.svg" alt="reply icon" />
+                <span class="reply">Reply</span>
+              </div>
+            </div>
+            <p class="text__paragraph">
+              <span class="mention">@maxblagun</span>
+            </p>
+          </div>
+        </div>
+        <div class="comment juliusomo">
+          <div class="vote">
+            <div class="image plus">
+              <img src="images/icon-plus.svg" alt="plus" />
+            </div>
+            <span class="score"></span>
+            <div class="image minus">
+              <img src="images/icon-minus.svg" alt="plus" />
+            </div>
+          </div>
+          <div class="text">
+            <div class="text__header">
+              <div class="text__user">
+                <img src="" alt="user" />
+                <h2 class="text__name"></h2>
+                <span class="you">you</span>
+                <span class="date"></span>
+              </div>
+              <div class="text__delete">
+                <div class="delete btn">
+                  <img src="images/icon-delete.svg" alt="delete icon" />
+                  <span class="delete">Delete</span>
+                </div>
+                <div class="edit btn">
+                  <img src="images/icon-edit.svg" alt="edit icon" />
+                  <span class="edit">Edit</span>
+                </div>
+              </div>
+            </div>
+            <p class="text__paragraph">
+              <span class="mention">@ramsesmiron</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="add-comment comment">
+        <img src="images/avatars/image-juliusomo.webp" alt="user" />
+        <textarea
+          name="add_comment_text"
+          id="add_comment_text"
+          class="add_comment_text"
+          placeholder="Add a comment..."
+        ></textarea>
+        <button class="send btn">Send</button>
+      </div>
+    </main>
+
+    <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by
+      <a
+        href="https://www.frontendmentor.io/profile/abdulaziz-M895"
+        target="_blank"
+        >Abdulaziz</a
+      >.
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
