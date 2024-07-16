@@ -17,3 +17,5 @@
 
 *.md
 !README.md
+
+.vscode

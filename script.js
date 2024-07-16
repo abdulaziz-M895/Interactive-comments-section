@@ -108,11 +108,30 @@ fetch("data.json")
     // Add event listener for handling enter key
     document.body.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
-        if (document.querySelector(".send-reply")) {
-          document.querySelector(".send-reply").click();
+        e.preventDefault();
+
+        let buttonClicked = false;
+
+        // Check for .send-reply button
+        const sendReplyButton = document.querySelector(".send-reply");
+        if (sendReplyButton && !buttonClicked) {
+          sendReplyButton.click();
+          buttonClicked = true;
         }
-        if (document.querySelector("button.update")) {
-          document.querySelector("button.update").click();
+
+        // Check for button.update
+        const updateButton = document.querySelector("button.update");
+        if (updateButton && !buttonClicked) {
+          updateButton.click();
+          buttonClicked = true;
+        }
+
+        // Check for button.send
+        const sendButton = document.querySelector("button.send");
+        if (sendButton && !buttonClicked) {
+          sendButton.click();
+          sendButton.previousElementSibling.value = "";
+          buttonClicked = true;
         }
       }
     });
@@ -327,10 +346,13 @@ function deleteReply() {
       deleteBtn.addEventListener("click", function () {
         popup.remove();
         overlay.remove();
+
         commentDeleteBtn.closest(".comment").classList.add("delete-animation");
+
         setTimeout(() => {
           commentDeleteBtn.closest(".comment").remove();
         }, 700);
+
         document.querySelector("html").style.overflow = "auto";
       });
 
