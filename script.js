@@ -12,8 +12,6 @@ const input = document.querySelector("textarea.add_comment_text");
 fetch("data.json")
   .then((respons) => respons.json())
   .then((data) => {
-    console.log(data);
-
     // Load initial comments and replies
     // top two comments
     const comments = data.comments;
@@ -40,25 +38,8 @@ fetch("data.json")
 
     editReply();
 
-    // Add event listener for sending a new comment
-    send.addEventListener("click", () => {
-      const newComment = makeComment(
-        data.currentUser.image.webp,
-        data.currentUser.username,
-        "maxblagun",
-        input.value
-      );
-
-      document.querySelector(".replies").appendChild(newComment);
-
-      newComment.scrollIntoView();
-
-      setFunctions(newComment);
-    });
-
     // Add event listeners for replying to comments
     let addComment;
-    let currentDate = "now";
     replies.forEach((reply, index) => {
       reply.addEventListener("click", function () {
         addComment = document.createElement("div");
@@ -105,6 +86,23 @@ fetch("data.json")
       });
     });
 
+    // Update the send button click event handler
+    send.addEventListener("click", () => {
+      if (isValidInput(input.value)) {
+        const newComment = makeComment(
+          data.currentUser.image.webp,
+          data.currentUser.username,
+          "maxblagun",
+          input.value
+        );
+
+        document.querySelector(".replies").appendChild(newComment);
+        newComment.scrollIntoView();
+        setFunctions(newComment);
+        input.value = ""; // Clear the input after sending
+      }
+    });
+
     // Add event listener for handling enter key
     document.body.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
@@ -112,30 +110,59 @@ fetch("data.json")
 
         let buttonClicked = false;
 
-        // Check for .send-reply button
-        const sendReplyButton = document.querySelector(".send-reply");
-        if (sendReplyButton && !buttonClicked) {
-          sendReplyButton.click();
-          buttonClicked = true;
+        // First, check if the delete popup is open
+        const deletePopup = document.querySelector(".delete-popup");
+        if (deletePopup) {
+          const deleteButton = deletePopup.querySelector(
+            "button.delete__delete"
+          );
+          if (deleteButton) {
+            deleteButton.click();
+            buttonClicked = true;
+          }
         }
 
-        // Check for button.update
-        const updateButton = document.querySelector("button.update");
-        if (updateButton && !buttonClicked) {
-          updateButton.click();
-          buttonClicked = true;
-        }
+        // Only check other buttons if delete button wasn't clicked
+        if (!buttonClicked) {
+          // Check for .send-reply button
+          const sendReplyButton = document.querySelector(".send-reply");
+          if (sendReplyButton) {
+            sendReplyButton.click();
+            buttonClicked = true;
+          }
 
-        // Check for button.send
-        const sendButton = document.querySelector("button.send");
-        if (sendButton && !buttonClicked) {
-          sendButton.click();
-          sendButton.previousElementSibling.value = "";
-          buttonClicked = true;
+          // Check for button.update
+          if (!buttonClicked) {
+            const updateButton = document.querySelector("button.update");
+            if (updateButton) {
+              updateButton.click();
+              buttonClicked = true;
+            }
+          }
+
+          // Check for button.send
+          if (!buttonClicked) {
+            const sendButton = document.querySelector("button.send");
+            if (sendButton) {
+              sendButton.click();
+              sendButton.previousElementSibling.value = "";
+              buttonClicked = true;
+            }
+          }
         }
       }
     });
   });
+
+function isValidInput(inputValue) {
+  // Trim the input and remove the mention if it exists
+  const trimmedInput = inputValue.trim();
+  const mentionRegex = /^@\w+\s*/;
+  const inputWithoutMention = trimmedInput.replace(mentionRegex, "");
+
+  // Check if the input is not empty after removing the mention
+  return inputWithoutMention.length > 0;
+}
 
 /**
  * Set functions for updating score, deleting reply, and editing reply
@@ -149,7 +176,6 @@ function setFunctions(comment) {
     if (comment) {
       comment.querySelector(".date").innerHTML = currentDate;
     }
-    console.log(currentDate);
   }, 60000); // get time every minute
 
   updateScore();
@@ -343,6 +369,8 @@ function deleteReply() {
 
       document.querySelector("html").style.overflow = "hidden";
 
+      stopBtns();
+
       deleteBtn.addEventListener("click", function () {
         popup.remove();
         overlay.remove();
@@ -354,12 +382,14 @@ function deleteReply() {
         }, 700);
 
         document.querySelector("html").style.overflow = "auto";
+        startBtns();
       });
 
       cancelBtn.addEventListener("click", function () {
         popup.remove();
         overlay.remove();
         document.querySelector("html").style.overflow = "auto";
+        startBtns();
       });
     });
   });
