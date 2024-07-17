@@ -69,19 +69,21 @@ fetch("data.json")
         addComment
           .querySelector("button")
           .addEventListener("click", function () {
-            let comment = makeComment(
-              data.currentUser.image.webp,
-              data.currentUser.username,
-              reply.previousElementSibling.querySelector("h2").textContent,
-              textarea.value
-            );
+            if (isValidInput(document.querySelector("textarea").value)) {
+              let comment = makeComment(
+                data.currentUser.image.webp,
+                data.currentUser.username,
+                reply.previousElementSibling.querySelector("h2").textContent,
+                textarea.value
+              );
 
-            addComment.className = comment.className;
-            addComment.innerHTML = comment.innerHTML;
+              addComment.className = comment.className;
+              addComment.innerHTML = comment.innerHTML;
 
-            setFunctions(addComment);
+              setFunctions(addComment);
 
-            startBtns();
+              startBtns();
+            }
           });
       });
     });
@@ -304,17 +306,19 @@ function editReply() {
         <button class="update">UPDATE</button>
       `;
       comment.querySelector(".update").addEventListener("click", () => {
-        comment.innerHTML = makeComment(
-          originalComment.querySelector(".text__user img").src,
-          originalComment.querySelector(".text__user h2").innerHTML,
-          originalComment.querySelector(".mention").innerHTML.slice(1),
-          comment.querySelector("textarea").value
-        ).innerHTML;
-        comment.className = "comment juliusomo";
+        if (isValidInput(document.querySelector("textarea").value)) {
+          comment.innerHTML = makeComment(
+            originalComment.querySelector(".text__user img").src,
+            originalComment.querySelector(".text__user h2").innerHTML,
+            originalComment.querySelector(".mention").innerHTML.slice(1),
+            comment.querySelector("textarea").value
+          ).innerHTML;
+          comment.className = "comment juliusomo";
 
-        setFunctions(comment);
+          setFunctions(comment);
 
-        startBtns();
+          startBtns();
+        }
       });
     });
   });
